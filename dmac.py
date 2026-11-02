@@ -104,7 +104,7 @@ def vol_quintile(x, col="vol20"):
 
 
 if __name__ == "__main__":
-    TOKEN = "049ea8c05bd615e4755be04857bb6ec63f61162ab44ca0db8a1bad0e"
+    TOKEN = "YOURTOKEN"
     rows = []
     for code in ["601398.SH", "600519.SH", "000001.SZ", "601318.SH"]:
         try:
