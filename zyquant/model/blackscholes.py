@@ -23,8 +23,7 @@ import numpy as np
 from scipy.stats import norm
 from .inputs import Kind, Number, OptionInputs, OptionType, check_inputs
 
-__all__ = ["black_scholes", "black_76", "garman_kohlhagen",
-           "bs_greeks", "implied_vol", "BlackScholes"]
+__all__ = ["black_scholes", "black_76", "garman_kohlhagen", "bs_greeks", "implied_vol", "BlackScholes"]
 
 _DAYS_PER_YEAR = 365.0
 _PERCENT = 100.0
@@ -102,8 +101,7 @@ def black_scholes(S: Number, K: Number, r: float, sigma: Number, T: Number, *,
     return price
 
 
-def black_76(F: Number, K: Number, r: float, sigma: Number, T: Number, *,
-             kind: Kind = "call") -> Number:
+def black_76(F: Number, K: Number, r: float, sigma: Number, T: Number, *, kind: Kind = "call") -> Number:
     """
     Price a futures / forward option with the Black-76 model.
 
@@ -328,8 +326,7 @@ class BlackScholes:
         self.option_type = OptionType.parse(self.option_type)
         a = self.inputs
         check_inputs(a.S, a.K, a.r, a.sigma, a.T, a.q)
-        self._values = bs_greeks(a.S, a.K, a.r, a.sigma, a.T,
-                                 kind=self.option_type, q=a.q)
+        self._values = bs_greeks(a.S, a.K, a.r, a.sigma, a.T, kind=self.option_type, q=a.q)
 
     @property
     def price(self) -> float:
