@@ -133,7 +133,7 @@ def _lattice(S, K, r, sigma, T, n, kind: OptionType, style: ExerciseStyle, metho
 def binomial_option(S: float, K: float, r: float, sigma: float,
                     T: float, n: int, *, kind: Kind = "call",
                     style: Style = "european",
-                    method: str = "loop", output: str = "payoff",
+                    method: str = "loop", output: str = "value",
                     q: float = 0.0) -> np.ndarray:
     """
     Price an option using an n-step binomial tree.
@@ -158,6 +158,7 @@ def binomial_option(S: float, K: float, r: float, sigma: float,
         Calculation method: "loop" or "vectorized".
     output : str
         Return matrix type: "price", "payoff", "value", or "delta".
+        Default is "value", i.e. the option value at each node.
     q : float, optional
         Continuous dividend yield, default is 0.0.
 
@@ -277,7 +278,7 @@ class BinomialModel:
     def delta(self) -> float:
         return float(self.delta_tree[0, 0])
 
-    def plot(self, output: str = "payoff", max_steps_plot: int = 5):
+    def plot(self, output: str = "value", max_steps_plot: int = 5):
         return plot_binomial_tree(
             self.inputs.S, self.inputs.K, self.inputs.r,
             self.inputs.sigma, self.inputs.T, self.n,

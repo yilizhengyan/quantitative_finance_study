@@ -114,7 +114,7 @@ def _lsm(paths, K: float, kind: OptionType, r: float, dt: float):
         if not in_the_money.any():
             continue
         x = spot[in_the_money] / K
-        basis = np.column_stack([np.ones_like(x), x, x * x])
+        basis = np.column_stack([np.ones_like(x), x, x * x, x ** 3])
         coef, *_ = np.linalg.lstsq(basis, cash[in_the_money], rcond=None)
         exercise = intrinsic[in_the_money] > basis @ coef
         index = np.flatnonzero(in_the_money)[exercise]
